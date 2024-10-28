@@ -52,7 +52,7 @@ def process_request():
         raise APIError("Final translation failed. Please try again.", 500)
 
     # Step 5: Detect and translate any remaining English words in the translated text
-    # intermediate_answer = translate_untranslated_words_with_google(intermediate_answer, "en_XX", "si_LK")
+    # intermediate_answer = detect_and_translate_untranslated_segments_batch(intermediate_answer, "en_XX", "si_LK")
     print("Intermediate LLM's Response (in English):", intermediate_answer)
 
     # Step 5: Apply custom lexicon and filter unwanted characters

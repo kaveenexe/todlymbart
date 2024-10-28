@@ -9,5 +9,5 @@ Question: {question}"""
 prompt = ChatPromptTemplate.from_template(template)
 
 # Set up the OllamaLLM model
-# REMOVE ENDPOINT IF RUN ON LOCAL MACHINE
+# REMOVE ENDPOINT IF RUN ON LOCAL MACHINE , base_url="http://34.56.218.131:11434/"
 ollama_model = OllamaLLM(model="blackalpha/todlymist", base_url="http://34.56.218.131:11434/")

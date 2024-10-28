@@ -7,7 +7,7 @@ def translate_text(text, source_lang, target_lang):
     encoded_text = tokenizer(text, return_tensors="pt")
     generated_tokens = model.generate(
         **encoded_text,
-        forced_bos_token_id=tokenizer.lang_code_to_id[target_lang],
+        forced_bos_token_id=tokenizer.lang_code_to_id[target_lang],    # Ensures the model generates text in the desired language.
         max_length=256,
         num_beams=10,
         repetition_penalty=1.5,

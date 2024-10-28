@@ -1,3 +1,4 @@
+import re
 # Dictionary for common terms to be translated manually (bilingual lexicon)
 custom_lexicon = {
     "todly": "Todly",
@@ -11,10 +12,15 @@ custom_lexicon = {
     "breast milk": "මව්කිරි",
     "legumes": "රනිල කුලයට අයත් බෝග",
     "lean meat": "සිහින් මස්",
+    "fortified cereals": "ශක්තිමත් ධාන්ය වර්ග",
+    "lentils": "පරිප්පු",
+    "peas": "කඩල",
+    "fish": "මාළු",
     "dense": "ඝනත්වයකින් යුක්ත",
     "nuts": "ඇට වර්ග",
     "avocados":"අලිගැට පේර",
     "vitamins,": "විටමින්",
+    "prenatal vitamins": "ප්රසූතියට පෙර විටමින්",
     "mineral foods,": "ඛනිජ ආහාර",
     "balanced diet": "සමබර ආහාර වේලක්",
     "dietitian": "පෝෂණවේදියෙක්",
@@ -35,10 +41,20 @@ custom_lexicon = {
     "bowel movements": "මලපහ කිරීම",
     "monitored": "නිරීක්ෂණය කල",
     "growth charts": "වර්ධන ප්‍රස්ථාර",
-    "spirit": "මනෝභාවය"
+    "spirit": "මනෝභාවය",
+    "prenatal": "පූර්ව ප්‍රසව",
+    "include": "ඇතුළත් වේ",
+    "dietary recommendations": "ආහාර නිර්දේශ",
+    "Bananas": "කෙසෙල්",
+    "aaple": "ඇපල්",
+    "sweet potatoes": "බතල"
 }
 
 def apply_custom_lexicon(text):
-    for english_term, sinhala_translation in custom_lexicon.items():
-        text = text.replace(english_term.lower(), sinhala_translation)
+    # Sort the lexicon by length of the key in descending order to match longer phrases first
+    sorted_lexicon = sorted(custom_lexicon.items(), key=lambda item: len(item[0]), reverse=True)
+    for english_term, sinhala_translation in sorted_lexicon:
+        # Use re.sub to match whole phrases
+        text = re.sub(r'\b' + re.escape(english_term) + r'\b', sinhala_translation, text, flags=re.IGNORECASE)
     return text
+
